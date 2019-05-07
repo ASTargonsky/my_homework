@@ -35,13 +35,13 @@ public class Hw1 {
         // Получаю данные (день, месяц, год)
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите день");
-        int days = Integer.parseInt(scanner.nextLine());
+        int days = scanner.nextInt();
 
         System.out.println("Введите месяц");
-        int months = Integer.parseInt(scanner.nextLine());
+        int months = scanner.nextInt();
 
         System.out.println("Введите год");
-        int years = Integer.parseInt(scanner.nextLine());
+        int years = scanner.nextInt();
 
         // Выясняю, является ли год високосным
         boolean leapYear = ((years % 4 == 0) && (years % 100 != 0) || (years % 400 == 0));
