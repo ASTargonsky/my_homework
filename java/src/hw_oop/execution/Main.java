@@ -1,54 +1,57 @@
 package hw_oop.execution;
 
-import hw_oop.Circle;
-import hw_oop.Point;
-import hw_oop.Rectangle;
+import hw_oop.figures.Circle;
+import hw_oop.figures.Point;
+import hw_oop.figures.Rectangle;
+import hw_oop.figures.Rhombus;
+import hw_oop.figures.RightTriangle;
+import hw_oop.figures.Square;
+import hw_oop.figures.common.Figure;
+import hw_oop.util.ShapeUtils;
 
 public class Main {
 
     public static void main(String[] args) {
-        Point distancePoint1 = new Point(-1, 8).distance(new Point(14, 9));
-        System.out.println("Расстояние от точки {-1,8} до заданной {14,9}: " + distancePoint1.toString());
-
-        Point distancePoint2 = new Point(4, 2).distance(new Point(7, 11));
-        System.out.println("Расстояние от точки {4,2} до заданной {7,11}: " + distancePoint2.toString());
-
-        Point translatedPoint = new Point(5, 7).translate(1, 3);
-        System.out.println("Новая точка после перемещения точки {5,7} на {1,3}: " + translatedPoint.toString());
-
-        Point scaledPoint = new Point(3, 5).scale(3);
-        System.out.println("Новая точка после изменения масштаба точки {3,5} на 3: " + scaledPoint.toString());
-
-        Point complexPoint1 = new Point(2, 3).translate(3, 7).scale(2);
-        System.out.println("Новая точка после перемещения точки {2,3} на {3,7} и масштабирования на 2: " + complexPoint1.toString());
-
-        Point complexPoint2 = new Point(4, 7).translate(5, 3).scale(3);
-        System.out.println("Новая точка после перемещения точки {4,7} на {5,3} и масштабирования на 3: " + complexPoint2.toString());
-
-        System.out.println("------ Задание 2 -------");
-
-        Rectangle rectangle1 = new Rectangle(new Point(2,4), new Point(2,8), new Point(5,8), new Point(5,4));
-        int diagonal1 = rectangle1.calculateDiagonal(rectangle1.getPoint1(), rectangle1.getPoint2(), rectangle1.getPoint3(), rectangle1.getPoint4());
+        Rectangle rectangle = new Rectangle(new Point(2,4), new Point(2,8), new Point(5,8), new Point(5,4));
+        int diagonal1 = rectangle.calculateDiagonal(rectangle.getPoint1(), rectangle.getPoint3(), rectangle.getPoint4());
         System.out.println("Диагональ прямоугольника со сторонами 3 и 4 приближенно равна: " + diagonal1);
-        int rectangleSquare1 = rectangle1.calculateSquare(rectangle1.getPoint1(), rectangle1.getPoint3(), rectangle1.getPoint4());
-        System.out.println("Площадь прямоугольника со сторонами 3 и 4 равна: " + rectangleSquare1);
+        rectangle.setSquare(rectangle.calculateSquare(rectangle.getPoint1(), rectangle.getPoint3(), rectangle.getPoint4()));
+        System.out.println(rectangle.toString());
 
-        Rectangle rectangle2 = new Rectangle(new Point(2,0), new Point(2,4), new Point(8,4), new Point(8,0));
-        int diagonal2 = rectangle2.calculateDiagonal(rectangle2.getPoint1(), rectangle2.getPoint2(), rectangle2.getPoint3(), rectangle2.getPoint4());
-        System.out.println("Диагональ прямоугольника со сторонами 6 и 4 приближенно равна: " + diagonal2);
-        int rectangleSquare2 = rectangle1.calculateSquare(rectangle2.getPoint1(), rectangle2.getPoint3(), rectangle2.getPoint4());
-        System.out.println("Площадь прямоугольника со сторонами 6 и 4 равна: " + rectangleSquare2);
-
-        Circle circle1 = new Circle(new Point(-3,2), new Point(5,2));
-        int circumference1 = circle1.calculateCircumference(circle1.getPoint1(), circle1.getPoint2());
+        Circle circle = new Circle(new Point(-3,2), new Point(5,2));
+        int circumference1 = circle.calculateCircumference(circle.getPoint1(), circle.getPoint2());
         System.out.println("Длина окружности приближенно равна: " + circumference1);
-        double circleSquare1 = circle1.calculateSquare(circle1.getPoint1(), circle1.getPoint2());
-        System.out.println("Площадь круга равна: " + circleSquare1);
+        circle.setSquare(circle.calculateSquare(circle.getPoint1(), circle.getPoint2()));
+        System.out.println(circle.toString());
 
-        Circle circle2 = new Circle(new Point(0,4), new Point(0,8));
-        int circumference2 = circle2.calculateCircumference(circle2.getPoint1(), circle2.getPoint2());
-        System.out.println("Длина окружности приближенно равна: " + circumference2);
-        double circleSquare2 = circle2.calculateSquare(circle2.getPoint1(), circle2.getPoint2());
-        System.out.println("Площадь круга равна: " + circleSquare2);
+        Square square = new Square(new Point(2,2), new Point(2,4), new Point(4,4), new Point(4,2));
+        square.setSquare(square.calculateSquare(square.getPoint1(), square.getPoint4()));
+        System.out.println(square.toString());
+
+        Rhombus rhombus = new Rhombus(new Point(2,2), new Point(2,4), new Point(4,4), new Point(4,2), 4);
+        rhombus.setSquare(rhombus.calculateSquare(rhombus.getPoint1(), rhombus.getPoint4()));
+        System.out.println(rhombus.toString());
+
+        Rhombus rhombus1 = new Rhombus(new Point(2,2), new Point(2,4), new Point(4,4), new Point(4,2), 4);
+        rhombus1.setSquare(rhombus1.calculateSquare(rhombus1.getPoint1(), rhombus1.getPoint4()));
+
+        RightTriangle triangle = new RightTriangle(new Point(2,2), new Point(5,6), new Point(5,2));
+        triangle.setSquare(triangle.calculateSquare(triangle.getPoint1(), triangle.getPoint2(), triangle.getPoint3()));
+        System.out.println(triangle.toString());
+        int triangleHeight = triangle.calculateHeight(triangle.getPoint1(), triangle.getPoint2(), triangle.getPoint3());
+        System.out.println("Высота прямоугольного треугольника равна: " + triangleHeight);
+
+        circle.areSquaresEqual(rectangle);
+        rhombus.areSquaresEqual(rhombus1);
+
+        Figure figure1 = new Rectangle(4, 4);
+        ShapeUtils.isRectangle(figure1.getD1(), figure1.getD2());
+
+        Figure figure2 = new Rhombus(2, 3);
+        ShapeUtils.isRectangle(figure2.getD1(), figure2.getD2());
+
+        Figure figure3 = new RightTriangle(4, 5 ,8);
+        ShapeUtils.isTriangle(figure3.getA(), figure3.getB(), figure3.getC());
+
     }
 }

@@ -1,6 +1,8 @@
-package hw_oop;
+package hw_oop.figures;
 
-public class Rectangle {
+import hw_oop.figures.common.Figure;
+
+public class Rectangle extends Figure {
 
     private Point point1;
     private Point point2;
@@ -12,6 +14,11 @@ public class Rectangle {
         this.point2 = point2;
         this.point3 = point3;
         this.point4 = point4;
+    }
+
+    public Rectangle(int d1, int d2) {
+        this.d1 = d1;
+        this.d2 = d2;
     }
 
     public Point getPoint1() {
@@ -30,22 +37,16 @@ public class Rectangle {
         return point4;
     }
 
-    public int calculateDiagonal(Point point1, Point point2, Point point3, Point point4) {
-        //a и c должны быть равны между собой, как и b и d
+    public int calculateDiagonal(Point point1, Point point3, Point point4) {
         int a = findA(point1, point4);
         int b = findB(point3, point4);
-        int c = findC(point2, point3);
-        int d = findD(point1, point2);
-        System.out.println("a = " + a);
-        System.out.println("b = " + b);
-        System.out.println("c = " + c);
-        System.out.println("d = " + d);
 
         //диагональ прямоугольника равна корню из суммы квадратов a и b
         return (int) Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
     }
 
-    public int calculateSquare(Point point1, Point point3, Point point4) {
+    @Override
+    public double calculateSquare(Point... points) {
         int a = findA(point1, point4);
         int b = findB(point3, point4);
 
@@ -69,4 +70,14 @@ public class Rectangle {
         return point2.getY() - Math.abs(point1.getY());
     }
 
+    @Override
+    public String toString() {
+        return "Прямоугольник{" +
+                "point1=" + point1 +
+                ", point2=" + point2 +
+                ", point3=" + point3 +
+                ", point4=" + point4 +
+                ", square=" + square +
+                '}';
+    }
 }

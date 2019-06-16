@@ -1,6 +1,8 @@
-package hw_oop;
+package hw_oop.figures;
 
-public class Circle {
+import hw_oop.figures.common.Figure;
+
+public class Circle extends Figure {
 
     private Point point1;
     private Point point2;
@@ -27,11 +29,12 @@ public class Circle {
         return (int) Math.PI * d;
     }
 
-    public double calculateSquare(Point point1, Point point2) {
+    @Override
+    public double calculateSquare(Point... points) {
         d = findDiameter(point1, point2);
 
         //площадь круга равна PI/4 * d2
-        return Math.PI / 4 * Math.pow(d, 2);
+        return (Math.PI / 4 * Math.pow(d, 2));
     }
 
     private int findDiameter(Point point1, Point point2) {
@@ -41,5 +44,15 @@ public class Circle {
             d = point2.getY() - Math.abs(point1.getY());
         }
         return d;
+    }
+
+    @Override
+    public String toString() {
+        return "Круг{" +
+                "point1=" + point1 +
+                ", point2=" + point2 +
+                ", d=" + d +
+                ", square=" + square +
+                '}';
     }
 }

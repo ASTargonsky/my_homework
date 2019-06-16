@@ -1,4 +1,4 @@
-package hw_oop;
+package hw_oop.figures;
 
 public final class Point {
 
